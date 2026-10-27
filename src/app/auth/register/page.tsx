@@ -1,8 +1,9 @@
 import AuthForm from "@/components/AuthForm";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 // import { auth } from "@/app/lib/auth";
 // import { connectDb } from "@/app/lib/mongodb";
 import { LoginState } from "@/lib/types";
+import { db } from "@/prisma/db";
 // import { headers } from "next/headers";
 // import { loginGoogleAction } from "@/app/lib/actions";
 
@@ -20,6 +21,8 @@ const RegisterPage = () => {
 
     console.log(name, email, password);
 
+    await db.orm.public.User.create({ name, email });
+
     // try {
     //   await auth.api.signUpEmail({
     //     body: {
@@ -33,7 +36,7 @@ const RegisterPage = () => {
     //   return { message: err.message };
     // }
 
-    redirect("/protected-route");
+    // redirect("/protected-route");
   };
 
   // const registerGoogleAction = async () => {
